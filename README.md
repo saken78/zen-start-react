@@ -1,73 +1,128 @@
-# React + TypeScript + Vite
+# Zen-Start React 🌸
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern React + TypeScript + Vite migration of [Zen-Start](https://github.com/saken78/Zen-Start), a minimalist, customizable browser start page with zen aesthetic.
 
-Currently, two official plugins are available:
+## 🚀 Project Status
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+**Migration Progress: Phase 3/6 Complete**
 
-## React Compiler
+- ✅ Phase 1: Vite + React + TypeScript setup
+- ✅ Phase 2: Type definitions (Config, Weather, Palette)
+- ✅ Phase 3: ConfigContext + Custom Hooks
+- ⏳ Phase 4: Component Migration (Clock, Weather, Tabs, StatusBar)
+- ⏳ Phase 5: New Features (Settings, Theme Switcher, Command Palette)
+- ⏳ Phase 6: Final Integration & Testing
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+See [TODO.md](./TODO.md) for detailed task breakdown.
 
-## Expanding the ESLint configuration
+## 🛠 Tech Stack
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **Framework:** React 18 + TypeScript
+- **Build Tool:** Vite (Lightning fast HMR)
+- **Styling:** Tailwind CSS + Catppuccin theme (4 palettes)
+- **UI Components:** shadcn/ui
+- **Icons:** Lucide React
+- **State Management:** React Context + Custom Hooks
+- **Font:** JetBrains Mono Nerd Font
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 📁 Project Structure
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```
+src/
+├── components/          # React components (WIP)
+├── config/             # Configuration (userconfig.ts)
+├── contexts/           # ConfigContext for global state
+├── hooks/              # Custom hooks
+│   ├── useConfig.ts
+│   ├── useKeyboard.ts
+│   ├── useLocalStorage.ts
+│   └── useWeather.ts
+├── lib/                # Utilities & libraries
+│   ├── palette.ts      # Catppuccin themes
+│   ├── storage.ts      # localStorage wrapper
+│   ├── utils.ts        # shadcn/ui utilities
+│   └── weatherAPI.ts   # OpenWeather API integration
+├── types/              # TypeScript definitions
+│   ├── config.ts
+│   └── weather.ts
+└── styles/
+    └── index.css       # Tailwind + global styles
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🎨 Features
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- **Multi-Tab Interface** - Multiple themed tabs for organizing links
+- **Weather Widget** - Real-time weather with °C/°F toggle
+- **Live Clock** - Customizable time display
+- **Theme Support** - 4 Catppuccin palettes (Latte, Frappe, Macchiato, Mocha)
+- **Persistent Config** - Auto-save to localStorage
+- **Keyboard Navigation** - Arrows, numbers, h/l keys for tab switching
+- **Mouse Wheel** - Scroll to switch tabs
+- **Weather Caching** - 1-hour cache to reduce API calls
+- **TypeScript** - Full type safety
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## 🚀 Quick Start
+
+```bash
+# Install dependencies
+npm install
+
+# Start dev server
+npm run dev
+
+# Build for production
+npm run build
+
+# Preview production build
+npm run preview
 ```
+
+## 📊 Performance Targets
+
+| Metric | Target |
+|--------|--------|
+| Bundle Size (gzip) | < 200KB |
+| Initial Load Time | < 200ms |
+| LCP (Largest Contentful Paint) | < 100ms |
+| FID (First Input Delay) | < 100ms |
+| CLS (Cumulative Layout Shift) | < 0.1 |
+
+## 🔧 Configuration
+
+Edit `src/config/userconfig.ts` to customize:
+
+```typescript
+export const defaultConfig: Config = {
+  temperature: {
+    location: 'Surabaya',
+    scale: 'C',
+  },
+  clock: {
+    format: 'h:i p', // h:i p = 12:30 PM, H:i = 00:30
+  },
+  tabs: [
+    // Add your tabs here
+  ],
+  // ... more options
+};
+```
+
+## 🎯 Supported Palettes
+
+- 🟡 **Latte** - Light theme
+- 🟠 **Frappe** - Medium dark theme
+- 🔵 **Macchiato** - Dark theme (default)
+- ⚫ **Mocha** - Darkest theme
+
+Switch palettes via the theme switcher (coming in Phase 5).
+
+## 📝 License
+
+Based on [@saken78](https://github.com/saken78)'s original [Zen-Start](https://github.com/saken78/Zen-Start) project.
+
+## 🔗 Related
+
+- **Original Project:** https://github.com/saken78/Zen-Start
+- **Catppuccin Theme:** https://catppuccin.com
+- **shadcn/ui:** https://ui.shadcn.com
+- **Lucide Icons:** https://lucide.dev
