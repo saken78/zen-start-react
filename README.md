@@ -4,13 +4,13 @@ A modern React + TypeScript + Vite migration of [Zen-Start](https://github.com/s
 
 ## 🚀 Project Status
 
-**Migration Progress: Phase 3/6 Complete**
+**Migration Progress: Phase 5/6 Complete**
 
 - ✅ Phase 1: Vite + React + TypeScript setup
 - ✅ Phase 2: Type definitions (Config, Weather, Palette)
 - ✅ Phase 3: ConfigContext + Custom Hooks
-- ⏳ Phase 4: Component Migration (Clock, Weather, Tabs, StatusBar)
-- ⏳ Phase 5: New Features (Settings, Theme Switcher, Command Palette)
+- ✅ Phase 4: Component Migration (Clock, Weather, Tabs, StatusBar)
+- ✅ Phase 5: New Features (Settings, Theme Switcher, Command Palette)
 - ⏳ Phase 6: Final Integration & Testing
 
 See [TODO.md](./TODO.md) for detailed task breakdown.
@@ -51,15 +51,27 @@ src/
 
 ## 🎨 Features
 
+### Core Features
 - **Multi-Tab Interface** - Multiple themed tabs for organizing links
 - **Weather Widget** - Real-time weather with °C/°F toggle
-- **Live Clock** - Customizable time display
+- **Live Clock** - Customizable time display with format tokens (h, H, i, s, p)
 - **Theme Support** - 4 Catppuccin palettes (Latte, Frappe, Macchiato, Mocha)
 - **Persistent Config** - Auto-save to localStorage
-- **Keyboard Navigation** - Arrows, numbers, h/l keys for tab switching
-- **Mouse Wheel** - Scroll to switch tabs
 - **Weather Caching** - 1-hour cache to reduce API calls
 - **TypeScript** - Full type safety
+
+### Navigation & Interaction
+- **Keyboard Navigation** - Arrow keys (← →), Vim keys (h/l), numbers (1-9)
+- **Mouse Wheel** - Scroll to switch tabs
+- **Command Palette** - Cmd+K (or Ctrl+K) for quick actions
+- **Settings Dialog** - Cmd+, (or Ctrl+,) to configure appearance and behavior
+- **Live Theme Switching** - Change palettes instantly across the app
+
+### Customization
+- **Settings Panel** - Configure weather location, clock format, enable/disable widgets
+- **Temperature Scale** - Toggle between Celsius and Fahrenheit
+- **Clock Format** - Custom format tokens: h (12h), H (24h), i (minutes), s (seconds), p (AM/PM)
+- **Widget Toggle** - Enable/disable clock and weather independently
 
 ## 🚀 Quick Start
 
@@ -107,6 +119,19 @@ export const defaultConfig: Config = {
 };
 ```
 
+## ⌨️ Keyboard Shortcuts
+
+| Shortcut | Action |
+|----------|--------|
+| `↑` / `↓` | Navigate tabs (arrow keys) |
+| `←` / `→` | Previous/next tab |
+| `h` / `l` | Vim-style tab navigation |
+| `1-9` | Jump to tab by number |
+| `↑` / `↓` on mouse wheel | Scroll to switch tabs |
+| `Cmd+K` / `Ctrl+K` | Open command palette |
+| `Cmd+,` / `Ctrl+,` | Open settings |
+| `⏱` (Click weather) | Toggle temperature scale |
+
 ## 🎯 Supported Palettes
 
 - 🟡 **Latte** - Light theme
@@ -114,7 +139,10 @@ export const defaultConfig: Config = {
 - 🔵 **Macchiato** - Dark theme (default)
 - ⚫ **Mocha** - Darkest theme
 
-Switch palettes via the theme switcher (coming in Phase 5).
+Switch palettes via:
+- **Command Palette** - Cmd+K → "Switch to [palette] theme"
+- **Settings Panel** - Cmd+, → Theme selector buttons
+- **Configuration** - Edit `currentPalette` in `src/config/userconfig.ts`
 
 ## 📝 License
 
