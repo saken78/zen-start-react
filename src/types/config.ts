@@ -27,7 +27,7 @@ export interface PaletteColors {
   crust: string;
 }
 
-export type PaletteName = 'latte' | 'frappe' | 'macchiato' | 'mocha';
+export type PaletteName = "latte" | "frappe" | "macchiato" | "mocha";
 
 export interface Link {
   id: string;
@@ -54,7 +54,7 @@ export interface Tab {
 
 export interface TemperatureConfig {
   location: string;
-  scale: 'C' | 'F';
+  scale: "C" | "F";
   enabled: boolean;
 }
 

@@ -115,8 +115,6 @@ export const palettes: Record<string, PaletteColors> = {
   },
 };
 
-export const getPalette = (
-  paletteName: string = "macchiato",
-): PaletteColors => {
+export const getPalette = (paletteName = "macchiato"): PaletteColors => {
   return palettes[paletteName] || palettes.macchiato;
 };

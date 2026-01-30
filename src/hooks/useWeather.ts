@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
-import { fetchWeather } from '@/lib/weatherAPI';
-import type { WeatherData } from '@/types/weather';
+import { useEffect, useState } from "react";
+import { fetchWeather } from "@/lib/weatherAPI";
+import type { WeatherData } from "@/types/weather";
 
 export const useWeather = (location: string) => {
   const [weather, setWeather] = useState<WeatherData | null>(null);
@@ -20,8 +20,8 @@ export const useWeather = (location: string) => {
         }
       } catch (err) {
         if (mounted) {
-          setError(err instanceof Error ? err.message : 'Failed to fetch weather');
-          console.error('Failed to fetch weather:', err);
+          setError(err instanceof Error ? err.message : "Failed to fetch weather");
+          console.error("Failed to fetch weather:", err);
         }
       } finally {
         if (mounted) {

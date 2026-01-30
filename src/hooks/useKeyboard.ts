@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect } from "react";
 
 interface KeyboardShortcuts {
   [key: string]: () => void;
@@ -9,8 +9,8 @@ export const useKeyboard = (shortcuts: KeyboardShortcuts) => {
     const handleKeyDown = (event: KeyboardEvent) => {
       // Don't trigger if user is typing in an input/textarea
       if (
-        document.activeElement?.tagName === 'INPUT' ||
-        document.activeElement?.tagName === 'TEXTAREA'
+        document.activeElement?.tagName === "INPUT" ||
+        document.activeElement?.tagName === "TEXTAREA"
       ) {
         return;
       }
@@ -22,7 +22,7 @@ export const useKeyboard = (shortcuts: KeyboardShortcuts) => {
       }
     };
 
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
   }, [shortcuts]);
 };

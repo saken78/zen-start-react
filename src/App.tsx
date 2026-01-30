@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react';
-import { CommandPalette } from '@/components/CommandPalette/CommandPalette';
-import { SettingsDialog } from '@/components/Settings/SettingsDialog';
-import { StatusBar } from '@/components/StatusBar/StatusBar';
-import { Tabs } from '@/components/Tabs/Tabs';
-import { ConfigProvider } from '@/contexts/ConfigContext';
-import { useConfig } from '@/hooks/useConfig';
-import '@/index.css';
+import { useEffect, useState } from "react";
+import { CommandPalette } from "@/components/CommandPalette/CommandPalette";
+import { SettingsDialog } from "@/components/Settings/SettingsDialog";
+import { StatusBar } from "@/components/StatusBar/StatusBar";
+import { Tabs } from "@/components/Tabs/Tabs";
+import { ConfigProvider } from "@/contexts/ConfigContext";
+import { useConfig } from "@/hooks/useConfig";
+import "@/index.css";
 
 function AppContent() {
   const { config } = useConfig();
@@ -21,20 +21,20 @@ function AppContent() {
       }
 
       // Cmd+K (Ctrl+K on Windows/Linux) for command palette
-      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+      if ((e.metaKey || e.ctrlKey) && e.key === "k") {
         e.preventDefault();
         setShowCommandPalette(true);
       }
 
       // Cmd+, (Ctrl+,) for settings
-      if ((e.metaKey || e.ctrlKey) && e.key === ',') {
+      if ((e.metaKey || e.ctrlKey) && e.key === ",") {
         e.preventDefault();
         setShowSettings(true);
       }
     };
 
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
 
   if (!config.tabs || config.tabs.length === 0) {

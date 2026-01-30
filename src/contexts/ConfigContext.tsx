@@ -1,9 +1,9 @@
-import type React from 'react';
-import { createContext, useCallback, useContext, useEffect, useState } from 'react';
-import { CONFIG_VERSION, defaultConfig } from '@/config/userconfig';
-import { getPalette } from '@/lib/palette';
-import { clearConfig, loadConfig, saveConfig } from '@/lib/storage';
-import type { Config, PaletteName } from '@/types/config';
+import type React from "react";
+import { createContext, useCallback, useContext, useEffect, useState } from "react";
+import { CONFIG_VERSION, defaultConfig } from "@/config/userconfig";
+import { getPalette } from "@/lib/palette";
+import { clearConfig, loadConfig, saveConfig } from "@/lib/storage";
+import type { Config, PaletteName } from "@/types/config";
 
 interface ConfigContextType {
   config: Config;
@@ -18,15 +18,15 @@ export const ConfigContext = createContext<ConfigContextType | undefined>(undefi
 export const ConfigProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [config, setConfig] = useState<Config>(() => {
     // Check localStorage version
-    const storedVersion = localStorage.getItem('config-version');
+    const storedVersion = localStorage.getItem("config-version");
 
     // If version mismatch, clear old config and use defaults
     if (storedVersion !== CONFIG_VERSION) {
-      localStorage.setItem('config-version', CONFIG_VERSION);
+      localStorage.setItem("config-version", CONFIG_VERSION);
       clearConfig();
       return {
         ...defaultConfig,
-        palette: getPalette(defaultConfig.currentPalette || 'macchiato'),
+        palette: getPalette(defaultConfig.currentPalette || "macchiato"),
       };
     }
 
@@ -35,14 +35,14 @@ export const ConfigProvider: React.FC<{ children: React.ReactNode }> = ({ childr
       // Use stored config if not overriding
       return {
         ...stored,
-        palette: stored.palette || getPalette(stored.currentPalette || 'macchiato'),
+        palette: stored.palette || getPalette(stored.currentPalette || "macchiato"),
       };
     }
 
     // Use default config
     return {
       ...defaultConfig,
-      palette: getPalette(defaultConfig.currentPalette || 'macchiato'),
+      palette: getPalette(defaultConfig.currentPalette || "macchiato"),
     };
   });
 
@@ -71,7 +71,7 @@ export const ConfigProvider: React.FC<{ children: React.ReactNode }> = ({ childr
   const resetConfig = useCallback(() => {
     setConfig({
       ...defaultConfig,
-      palette: getPalette(defaultConfig.currentPalette || 'macchiato'),
+      palette: getPalette(defaultConfig.currentPalette || "macchiato"),
     });
   }, []);
 
@@ -102,7 +102,7 @@ export const ConfigProvider: React.FC<{ children: React.ReactNode }> = ({ childr
 export const useConfigContext = () => {
   const context = useContext(ConfigContext);
   if (!context) {
-    throw new Error('useConfigContext must be used within ConfigProvider');
+    throw new Error("useConfigContext must be used within ConfigProvider");
   }
   return context;
 };

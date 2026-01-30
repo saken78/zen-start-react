@@ -1,8 +1,8 @@
-import { Settings } from 'lucide-react';
-import type React from 'react';
-import { Clock } from '@/components/Clock/Clock';
-import { Weather } from '@/components/Weather/Weather';
-import { useConfig } from '@/hooks/useConfig';
+import { Settings } from "lucide-react";
+import type React from "react";
+import { Clock } from "@/components/Clock/Clock";
+import { Weather } from "@/components/Weather/Weather";
+import { useConfig } from "@/hooks/useConfig";
 
 interface StatusBarProps {
   tabName?: string;
@@ -37,7 +37,7 @@ export const StatusBar: React.FC<StatusBarProps> = ({
                 <div
                   key={tab.id}
                   className={`text-xs font-bold transition-colors ${
-                    index === tabIndex ? 'text-green' : 'text-subtext1'
+                    index === tabIndex ? "text-green" : "text-subtext1"
                   }`}
                   title={tab.name}
                 >

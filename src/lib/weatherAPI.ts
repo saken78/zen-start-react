@@ -1,8 +1,8 @@
-import type { OpenWeatherResponse, WeatherData } from '@/types/weather';
+import type { OpenWeatherResponse, WeatherData } from "@/types/weather";
 
-const APP_ID = '50a34e070dd5c09a99554b57ab7ea7e2';
+const APP_ID = "50a34e070dd5c09a99554b57ab7ea7e2";
 const WEATHER_CACHE_TTL = 3600000; // 1 hour in milliseconds
-const WEATHER_CACHE_KEY = 'zen-weather-cache';
+const WEATHER_CACHE_KEY = "zen-weather-cache";
 
 interface CachedWeather {
   timestamp: number;
@@ -14,7 +14,7 @@ export const fetchWeather = async (location: string): Promise<WeatherData> => {
     // Check cache first
     const cached = getWeatherFromCache(location);
     if (cached) {
-      console.log('Using cached weather data for', location);
+      console.log("Using cached weather data for", location);
       return cached;
     }
 
@@ -40,7 +40,7 @@ export const fetchWeather = async (location: string): Promise<WeatherData> => {
 
     return weatherData;
   } catch (error) {
-    console.error('Weather API error:', error);
+    console.error("Weather API error:", error);
     throw error;
   }
 };
@@ -66,7 +66,7 @@ const getWeatherFromCache = (location: string): WeatherData | null => {
 
     return cached.data;
   } catch (error) {
-    console.error('Error reading weather cache:', error);
+    console.error("Error reading weather cache:", error);
     return null;
   }
 };
@@ -87,6 +87,6 @@ const cacheWeatherData = (location: string, data: WeatherData): void => {
 
     localStorage.setItem(WEATHER_CACHE_KEY, JSON.stringify(cache));
   } catch (error) {
-    console.error('Error caching weather data:', error);
+    console.error("Error caching weather data:", error);
   }
 };

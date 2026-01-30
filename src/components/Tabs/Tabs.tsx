@@ -1,8 +1,8 @@
-import type React from 'react';
-import { useEffect, useState } from 'react';
-import { useConfig } from '@/hooks/useConfig';
-import type { Tab } from '@/types/config';
-import { TabPanel } from './TabPanel';
+import type React from "react";
+import { useEffect, useState } from "react";
+import { useConfig } from "@/hooks/useConfig";
+import type { Tab } from "@/types/config";
+import { TabPanel } from "./TabPanel";
 
 interface TabsProps {
   tabs: Tab[];
@@ -28,7 +28,7 @@ export const Tabs: React.FC<TabsProps> = ({ tabs }) => {
     if (index >= 0 && index < tabs.length) {
       setActiveTabIndex(index);
       if (config.openLastVisitedTab) {
-        updateNested('lastVisitedTab', index);
+        updateNested("lastVisitedTab", index);
       }
     }
   };
@@ -45,25 +45,25 @@ export const Tabs: React.FC<TabsProps> = ({ tabs }) => {
       const tabCount = tabs.length;
 
       // Arrow keys
-      if (e.key === 'ArrowRight') {
+      if (e.key === "ArrowRight") {
         e.preventDefault();
         handleTabChange((currentIndex + 1) % tabCount);
-      } else if (e.key === 'ArrowLeft') {
+      } else if (e.key === "ArrowLeft") {
         e.preventDefault();
         handleTabChange((currentIndex - 1 + tabCount) % tabCount);
       }
 
       // Vim keys (h/l)
-      else if (e.key === 'l' && !e.ctrlKey && !e.altKey && !e.metaKey) {
+      else if (e.key === "l" && !e.ctrlKey && !e.altKey && !e.metaKey) {
         e.preventDefault();
         handleTabChange((currentIndex + 1) % tabCount);
-      } else if (e.key === 'h' && !e.ctrlKey && !e.altKey && !e.metaKey) {
+      } else if (e.key === "h" && !e.ctrlKey && !e.altKey && !e.metaKey) {
         e.preventDefault();
         handleTabChange((currentIndex - 1 + tabCount) % tabCount);
       }
 
       // Number keys (1-9)
-      else if (e.key >= '1' && e.key <= '9') {
+      else if (e.key >= "1" && e.key <= "9") {
         const tabIndex = parseInt(e.key) - 1;
         if (tabIndex < tabCount) {
           e.preventDefault();
@@ -72,8 +72,8 @@ export const Tabs: React.FC<TabsProps> = ({ tabs }) => {
       }
     };
 
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
   }, [activeTabIndex, tabs.length]);
 
   // Mouse wheel navigation
@@ -89,8 +89,8 @@ export const Tabs: React.FC<TabsProps> = ({ tabs }) => {
       }
     };
 
-    window.addEventListener('wheel', handleWheel, { passive: false });
-    return () => window.removeEventListener('wheel', handleWheel);
+    window.addEventListener("wheel", handleWheel, { passive: false });
+    return () => window.removeEventListener("wheel", handleWheel);
   }, [activeTabIndex, tabs.length]);
 
   const activeTab = tabs[activeTabIndex];
@@ -109,7 +109,7 @@ export const Tabs: React.FC<TabsProps> = ({ tabs }) => {
             key={tab.id}
             onClick={() => handleTabChange(index)}
             className={`w-2 h-2 rounded-full transition-all duration-300 ${
-              index === activeTabIndex ? 'bg-green w-6' : 'bg-surface1 hover:bg-surface2'
+              index === activeTabIndex ? "bg-green w-6" : "bg-surface1 hover:bg-surface2"
             }`}
             title={`${tab.name} (${index + 1})`}
             aria-label={`Tab ${index + 1}: ${tab.name}`}

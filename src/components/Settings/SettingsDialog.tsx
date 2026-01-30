@@ -1,9 +1,9 @@
-import { X } from 'lucide-react';
-import type React from 'react';
-import { useState } from 'react';
-import { useConfig } from '@/hooks/useConfig';
-import { palettes } from '@/lib/palette';
-import type { PaletteName } from '@/types/config';
+import { X } from "lucide-react";
+import type React from "react";
+import { useState } from "react";
+import { useConfig } from "@/hooks/useConfig";
+import { palettes } from "@/lib/palette";
+import type { PaletteName } from "@/types/config";
 
 interface SettingsDialogProps {
   isOpen: boolean;
@@ -19,12 +19,12 @@ export const SettingsDialog: React.FC<SettingsDialogProps> = ({ isOpen, onClose 
   const [weatherEnabled, setWeatherEnabled] = useState(config.temperature.enabled);
 
   const handleSave = () => {
-    updateNested('temperature', {
+    updateNested("temperature", {
       location: tempLocation,
       scale: tempScale,
       enabled: weatherEnabled,
     });
-    updateNested('clock', {
+    updateNested("clock", {
       format: clockFormat,
       enabled: clockEnabled,
     });
@@ -60,8 +60,8 @@ export const SettingsDialog: React.FC<SettingsDialogProps> = ({ isOpen, onClose 
                     onClick={() => switchPalette(paletteName)}
                     className={`px-3 py-2 rounded text-xs font-medium transition-colors ${
                       config.currentPalette === paletteName
-                        ? 'bg-green text-base'
-                        : 'bg-surface1 text-text hover:bg-surface2'
+                        ? "bg-green text-base"
+                        : "bg-surface1 text-text hover:bg-surface2"
                     }`}
                   >
                     {paletteName}
@@ -81,12 +81,12 @@ export const SettingsDialog: React.FC<SettingsDialogProps> = ({ isOpen, onClose 
               <button
                 onClick={() => setClockEnabled(!clockEnabled)}
                 className={`w-10 h-6 rounded-full transition-colors ${
-                  clockEnabled ? 'bg-green' : 'bg-surface1'
+                  clockEnabled ? "bg-green" : "bg-surface1"
                 }`}
               >
                 <div
                   className={`w-5 h-5 rounded-full bg-crust transition-transform ${
-                    clockEnabled ? 'translate-x-5' : 'translate-x-0'
+                    clockEnabled ? "translate-x-5" : "translate-x-0"
                   }`}
                 />
               </button>
@@ -118,12 +118,12 @@ export const SettingsDialog: React.FC<SettingsDialogProps> = ({ isOpen, onClose 
               <button
                 onClick={() => setWeatherEnabled(!weatherEnabled)}
                 className={`w-10 h-6 rounded-full transition-colors ${
-                  weatherEnabled ? 'bg-green' : 'bg-surface1'
+                  weatherEnabled ? "bg-green" : "bg-surface1"
                 }`}
               >
                 <div
                   className={`w-5 h-5 rounded-full bg-crust transition-transform ${
-                    weatherEnabled ? 'translate-x-5' : 'translate-x-0'
+                    weatherEnabled ? "translate-x-5" : "translate-x-0"
                   }`}
                 />
               </button>
@@ -148,14 +148,14 @@ export const SettingsDialog: React.FC<SettingsDialogProps> = ({ isOpen, onClose 
               <div className='space-y-2'>
                 <label className='text-xs font-medium text-subtext1'>Scale</label>
                 <div className='flex gap-2'>
-                  {(['C', 'F'] as const).map((scale) => (
+                  {(["C", "F"] as const).map((scale) => (
                     <button
                       key={scale}
                       onClick={() => setTempScale(scale)}
                       className={`flex-1 px-3 py-2 rounded text-xs font-medium transition-colors ${
                         tempScale === scale
-                          ? 'bg-green text-base'
-                          : 'bg-surface1 text-text hover:bg-surface2'
+                          ? "bg-green text-base"
+                          : "bg-surface1 text-text hover:bg-surface2"
                       }`}
                     >
                       °{scale}
