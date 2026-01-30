@@ -1,4 +1,4 @@
-import { WeatherData, OpenWeatherResponse } from '@/types/weather';
+import type { OpenWeatherResponse, WeatherData } from '@/types/weather';
 
 const APP_ID = '50a34e070dd5c09a99554b57ab7ea7e2';
 const WEATHER_CACHE_TTL = 3600000; // 1 hour in milliseconds
@@ -20,7 +20,7 @@ export const fetchWeather = async (location: string): Promise<WeatherData> => {
 
     // Fetch from API
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURI(
-      location
+      location,
     )}&units=metric&appid=${APP_ID}`;
 
     const response = await fetch(url);

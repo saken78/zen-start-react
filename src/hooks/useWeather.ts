@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
-import { WeatherData } from '@/types/weather';
+import { useEffect, useState } from 'react';
 import { fetchWeather } from '@/lib/weatherAPI';
+import type { WeatherData } from '@/types/weather';
 
 export const useWeather = (location: string) => {
   const [weather, setWeather] = useState<WeatherData | null>(null);

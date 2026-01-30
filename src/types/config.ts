@@ -30,31 +30,38 @@ export interface PaletteColors {
 export type PaletteName = 'latte' | 'frappe' | 'macchiato' | 'mocha';
 
 export interface Link {
+  id: string;
   name: string;
   url: string;
   icon?: string;
   icon_color?: string;
+  category_id: string;
 }
 
 export interface Category {
+  id: string;
   name: string;
-  links: Link[];
+  links?: Link[];
 }
 
 export interface Tab {
+  id: string;
   name: string;
   background_url: string;
   categories: Category[];
+  links: Link[];
 }
 
 export interface TemperatureConfig {
   location: string;
   scale: 'C' | 'F';
+  enabled: boolean;
 }
 
 export interface ClockConfig {
   format: string;
   iconColor?: string;
+  enabled: boolean;
 }
 
 export interface Config {
@@ -64,6 +71,7 @@ export interface Config {
   disabled: string[];
   fastlink: string;
   openLastVisitedTab: boolean;
+  lastVisitedTab: number;
   tabs: Tab[];
   palette?: PaletteColors;
   currentPalette?: PaletteName;
