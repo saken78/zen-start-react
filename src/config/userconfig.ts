@@ -25,7 +25,7 @@ export const defaultConfig: Config = {
     {
       id: 'personal',
       name: 'personal',
-      background_url: '',
+      background_url: '/images/banners/personal-bg.gif',
       categories: [
         {
           id: 'personal-social',
@@ -174,7 +174,7 @@ export const defaultConfig: Config = {
     {
       id: 'dev',
       name: 'dev',
-      background_url: '',
+      background_url: '/images/banners/dev-bg.gif',
       categories: [
         {
           id: 'dev-code',
@@ -331,7 +331,7 @@ export const defaultConfig: Config = {
     {
       id: 'work',
       name: 'work',
-      background_url: '',
+      background_url: '/images/banners/work-bg.gif',
       categories: [
         {
           id: 'work-communication',
@@ -435,7 +435,7 @@ export const defaultConfig: Config = {
     {
       id: 'creative',
       name: 'creative',
-      background_url: '',
+      background_url: '/images/banners/creative-bg.gif',
       categories: [
         {
           id: 'creative-design',
