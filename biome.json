@@ -52,7 +52,7 @@
       "indentWidth": 2,
       "lineEnding": "lf",
       "lineWidth": 100,
-      "quoteStyle": "single",
+      "quoteStyle": "double",
       "jsxQuoteStyle": "single",
       "quoteProperties": "asNeeded",
       "trailingCommas": "all",
