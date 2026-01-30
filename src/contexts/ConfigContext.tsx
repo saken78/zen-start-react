@@ -1,46 +1,48 @@
-import React, {
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-  useCallback,
-} from "react";
-import type { Config, PaletteName } from "@/types/config";
-import { loadConfig, saveConfig } from "@/lib/storage";
-import { getPalette } from "@/lib/palette";
-import { defaultConfig } from "@/config/userconfig";
+import type React from 'react';
+import { createContext, useCallback, useContext, useEffect, useState } from 'react';
+import { CONFIG_VERSION, defaultConfig } from '@/config/userconfig';
+import { getPalette } from '@/lib/palette';
+import { clearConfig, loadConfig, saveConfig } from '@/lib/storage';
+import type { Config, PaletteName } from '@/types/config';
 
 interface ConfigContextType {
   config: Config;
   updateConfig: <K extends keyof Config>(key: K, value: Config[K]) => void;
-  updateNested: <K extends keyof Config>(
-    key: K,
-    value: Partial<Config[K]>,
-  ) => void;
+  updateNested: <K extends keyof Config>(key: K, value: Partial<Config[K]>) => void;
   resetConfig: () => void;
   switchPalette: (paletteName: PaletteName) => void;
 }
 
-export const ConfigContext = createContext<ConfigContextType | undefined>(
-  undefined,
-);
+export const ConfigContext = createContext<ConfigContextType | undefined>(undefined);
 
-export const ConfigProvider: React.FC<{ children: React.ReactNode }> = ({
-  children,
-}) => {
+export const ConfigProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [config, setConfig] = useState<Config>(() => {
-    const stored = loadConfig();
-    if (stored) {
-      // Ensure palette is always set
+    // Check localStorage version
+    const storedVersion = localStorage.getItem('config-version');
+
+    // If version mismatch, clear old config and use defaults
+    if (storedVersion !== CONFIG_VERSION) {
+      localStorage.setItem('config-version', CONFIG_VERSION);
+      clearConfig();
       return {
-        ...stored,
-        palette:
-          stored.palette || getPalette(stored.currentPalette || "macchiato"),
+        ...defaultConfig,
+        palette: getPalette(defaultConfig.currentPalette || 'macchiato'),
       };
     }
+
+    const stored = loadConfig();
+    if (stored && defaultConfig.overrideStorage === false) {
+      // Use stored config if not overriding
+      return {
+        ...stored,
+        palette: stored.palette || getPalette(stored.currentPalette || 'macchiato'),
+      };
+    }
+
+    // Use default config
     return {
       ...defaultConfig,
-      palette: getPalette(defaultConfig.currentPalette || "macchiato"),
+      palette: getPalette(defaultConfig.currentPalette || 'macchiato'),
     };
   });
 
@@ -49,33 +51,27 @@ export const ConfigProvider: React.FC<{ children: React.ReactNode }> = ({
     saveConfig(config);
   }, [config]);
 
-  const updateConfig = useCallback(
-    <K extends keyof Config>(key: K, value: Config[K]) => {
-      setConfig((prev) => ({
-        ...prev,
-        [key]: value,
-      }));
-    },
-    [],
-  );
+  const updateConfig = useCallback(<K extends keyof Config>(key: K, value: Config[K]) => {
+    setConfig((prev) => ({
+      ...prev,
+      [key]: value,
+    }));
+  }, []);
 
-  const updateNested = useCallback(
-    <K extends keyof Config>(key: K, value: Partial<Config[K]>) => {
-      setConfig((prev) => ({
-        ...prev,
-        [key]: {
-          ...(prev[key] as Record<string, any>),
-          ...value,
-        },
-      }));
-    },
-    [],
-  );
+  const updateNested = useCallback(<K extends keyof Config>(key: K, value: Partial<Config[K]>) => {
+    setConfig((prev) => ({
+      ...prev,
+      [key]: {
+        ...(prev[key] as Record<string, any>),
+        ...value,
+      },
+    }));
+  }, []);
 
   const resetConfig = useCallback(() => {
     setConfig({
       ...defaultConfig,
-      palette: getPalette(defaultConfig.currentPalette || "macchiato"),
+      palette: getPalette(defaultConfig.currentPalette || 'macchiato'),
     });
   }, []);
 
@@ -106,7 +102,7 @@ export const ConfigProvider: React.FC<{ children: React.ReactNode }> = ({
 export const useConfigContext = () => {
   const context = useContext(ConfigContext);
   if (!context) {
-    throw new Error("useConfigContext must be used within ConfigProvider");
+    throw new Error('useConfigContext must be used within ConfigProvider');
   }
   return context;
 };

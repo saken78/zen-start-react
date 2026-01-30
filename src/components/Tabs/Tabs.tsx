@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import type React from 'react';
+import { useEffect, useState } from 'react';
+import { useConfig } from '@/hooks/useConfig';
 import type { Tab } from '@/types/config';
 import { TabPanel } from './TabPanel';
-import { useConfig } from '@/hooks/useConfig';
 
 interface TabsProps {
   tabs: Tab[];
@@ -13,7 +14,11 @@ export const Tabs: React.FC<TabsProps> = ({ tabs }) => {
 
   // Load last visited tab from config
   useEffect(() => {
-    if (config.openLastVisitedTab && config.lastVisitedTab !== undefined && config.lastVisitedTab < tabs.length) {
+    if (
+      config.openLastVisitedTab &&
+      config.lastVisitedTab !== undefined &&
+      config.lastVisitedTab < tabs.length
+    ) {
       setActiveTabIndex(config.lastVisitedTab);
     }
   }, [config.openLastVisitedTab, config.lastVisitedTab, tabs.length]);
@@ -91,22 +96,20 @@ export const Tabs: React.FC<TabsProps> = ({ tabs }) => {
   const activeTab = tabs[activeTabIndex];
 
   return (
-    <div className="relative w-full h-full bg-base">
+    <div className='relative w-full h-full bg-base'>
       {/* Tab panels */}
       {tabs.map((tab, index) => (
         <TabPanel key={tab.id} tab={tab} isActive={index === activeTabIndex} />
       ))}
 
       {/* Tab indicators (bottom left) */}
-      <div className="absolute bottom-4 left-4 z-20 flex items-center gap-1">
+      <div className='absolute bottom-4 left-4 z-20 flex items-center gap-1'>
         {tabs.map((tab, index) => (
           <button
             key={tab.id}
             onClick={() => handleTabChange(index)}
             className={`w-2 h-2 rounded-full transition-all duration-300 ${
-              index === activeTabIndex
-                ? 'bg-green w-6'
-                : 'bg-surface1 hover:bg-surface2'
+              index === activeTabIndex ? 'bg-green w-6' : 'bg-surface1 hover:bg-surface2'
             }`}
             title={`${tab.name} (${index + 1})`}
             aria-label={`Tab ${index + 1}: ${tab.name}`}
@@ -116,8 +119,8 @@ export const Tabs: React.FC<TabsProps> = ({ tabs }) => {
 
       {/* Tab name display (top right) */}
       {activeTab && (
-        <div className="absolute top-4 right-4 z-20">
-          <span className="text-xs font-bold uppercase tracking-wider text-text opacity-75">
+        <div className='absolute top-4 right-4 z-20'>
+          <span className='text-xs font-bold uppercase tracking-wider text-text opacity-75'>
             {activeTab.name} ({activeTabIndex + 1}/{tabs.length})
           </span>
         </div>

@@ -340,17 +340,17 @@ export const LinkCard: React.FC<LinkCardProps> = ({ link, accentColor }) => {
       href={link.url}
       target="_blank"
       rel="noopener noreferrer"
-      className="inline-flex items-center gap-2 px-3 py-2 bg-mantle rounded-lg shadow-catppuccin hover:translate-y-1 hover:shadow-none transition-all duration-100 group"
+      className="inline-flex items-center gap-2 px-4 py-2.5 bg-mantle/80 backdrop-blur-sm rounded-lg shadow-lg hover:shadow-xl hover:bg-mantle hover:translate-y-0.5 transition-all duration-150 group border border-surface0/30 hover:border-surface0/60"
     >
       {IconComponent && (
         <IconComponent
-          className="w-5 h-5 flex-shrink-0"
+          className="w-4 h-4 flex-shrink-0"
           color={link.icon_color || config.palette?.text}
         />
       )}
 
       {link.name && (
-        <span className="text-text font-bold text-sm group-hover:text-[--accent-color] transition-colors whitespace-nowrap">
+        <span className="text-text font-semibold text-xs group-hover:text-[--accent-color] transition-colors whitespace-nowrap">
           {link.name}
         </span>
       )}

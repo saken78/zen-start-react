@@ -12,7 +12,7 @@ export const CategoryLinks: React.FC<CategoryLinksProps> = ({ categories, links 
   const { config } = useConfig();
 
   return (
-    <div className="flex flex-col gap-6 p-6">
+    <div className="flex flex-col gap-8">
       {categories.map((category) => {
         const categoryLinks = links.filter((link) => link.category_id === category.id);
 
@@ -20,16 +20,16 @@ export const CategoryLinks: React.FC<CategoryLinksProps> = ({ categories, links 
         if (categoryLinks.length === 0) return null;
 
         return (
-          <div key={category.id} className="flex flex-col gap-2">
+          <div key={category.id} className="flex flex-col gap-3">
             {/* Category heading */}
             {category.name && (
-              <h2 className="text-sm font-bold uppercase tracking-wider text-subtext0 opacity-75">
+              <h2 className="text-xs font-bold uppercase tracking-widest text-subtext0 opacity-60">
                 {category.name}
               </h2>
             )}
 
             {/* Links grid */}
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-3">
               {categoryLinks.map((link) => (
                 <LinkCard
                   key={link.id}
