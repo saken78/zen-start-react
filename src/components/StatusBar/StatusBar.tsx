@@ -1,4 +1,5 @@
 import React from 'react';
+import { Settings } from 'lucide-react';
 import { Clock } from '@/components/Clock/Clock';
 import { Weather } from '@/components/Weather/Weather';
 import { useConfig } from '@/hooks/useConfig';
@@ -7,9 +8,15 @@ interface StatusBarProps {
   tabName?: string;
   tabIndex?: number;
   tabCount?: number;
+  onSettingsClick?: () => void;
 }
 
-export const StatusBar: React.FC<StatusBarProps> = ({ tabName, tabIndex = 0, tabCount = 1 }) => {
+export const StatusBar: React.FC<StatusBarProps> = ({
+  tabName,
+  tabIndex = 0,
+  tabCount = 1,
+  onSettingsClick,
+}) => {
   const { config } = useConfig();
 
   return (
@@ -58,6 +65,17 @@ export const StatusBar: React.FC<StatusBarProps> = ({ tabName, tabIndex = 0, tab
             <div>
               <Clock />
             </div>
+          )}
+
+          {/* Settings button */}
+          {onSettingsClick && (
+            <button
+              onClick={onSettingsClick}
+              className="p-1 hover:bg-surface0 rounded transition-colors"
+              title="Settings (⌘,)"
+            >
+              <Settings className="w-4 h-4 text-subtext1 hover:text-text" />
+            </button>
           )}
         </div>
       </div>

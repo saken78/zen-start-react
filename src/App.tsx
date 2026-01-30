@@ -1,11 +1,41 @@
+import { useState, useEffect } from 'react';
 import { ConfigProvider } from '@/contexts/ConfigContext';
 import { useConfig } from '@/hooks/useConfig';
 import { Tabs } from '@/components/Tabs/Tabs';
 import { StatusBar } from '@/components/StatusBar/StatusBar';
+import { SettingsDialog } from '@/components/Settings/SettingsDialog';
+import { CommandPalette } from '@/components/CommandPalette/CommandPalette';
 import '@/index.css';
 
 function AppContent() {
   const { config } = useConfig();
+  const [showSettings, setShowSettings] = useState(false);
+  const [showCommandPalette, setShowCommandPalette] = useState(false);
+
+  // Handle Cmd+K for command palette and Cmd+, for settings
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Skip if user is typing in input/textarea
+      if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) {
+        return;
+      }
+
+      // Cmd+K (Ctrl+K on Windows/Linux) for command palette
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        setShowCommandPalette(true);
+      }
+
+      // Cmd+, (Ctrl+,) for settings
+      if ((e.metaKey || e.ctrlKey) && e.key === ',') {
+        e.preventDefault();
+        setShowSettings(true);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
 
   if (!config.tabs || config.tabs.length === 0) {
     return (
@@ -26,7 +56,18 @@ function AppContent() {
       </div>
 
       {/* Status bar */}
-      <StatusBar tabCount={config.tabs.length} />
+      <StatusBar
+        tabCount={config.tabs.length}
+        onSettingsClick={() => setShowSettings(true)}
+      />
+
+      {/* Dialogs */}
+      <SettingsDialog isOpen={showSettings} onClose={() => setShowSettings(false)} />
+      <CommandPalette
+        isOpen={showCommandPalette}
+        onOpenSettings={() => setShowSettings(true)}
+        onClose={() => setShowCommandPalette(false)}
+      />
     </div>
   );
 }
