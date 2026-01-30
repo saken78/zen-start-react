@@ -4,7 +4,7 @@ import type { Config } from '@/types/config';
 export const CONFIG_VERSION = "2.0.0";
 
 export const defaultConfig: Config = {
-  overrideStorage: true,
+  overrideStorage: false,
   temperature: {
     location: 'Surabaya',
     scale: 'C',
