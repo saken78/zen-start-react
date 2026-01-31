@@ -28,16 +28,17 @@ export const TabPanel: React.FC<TabPanelProps> = ({ tab, isActive }) => {
 
       {/* Content */}
       <div className='relative z-10 h-full overflow-y-auto flex flex-col'>
-        <div className='flex items-start gap-4 flex-1'>
+        <div className='flex items-start gap-6 flex-1'>
           {/* Tab label - vertical text on left */}
           {tab.name && (
-            <div className='flex items-center justify-center pt-6 pl-4 min-w-fit'>
+            <div className='flex items-start justify-center pt-8 pl-6 min-w-fit sticky top-0'>
               <span
-                className='text-xl font-bold text-white/20 uppercase tracking-widest'
+                className='text-lg font-bold text-white/15 uppercase tracking-wider'
                 style={{
                   writingMode: "vertical-rl",
                   transform: "rotate(180deg)",
-                  letterSpacing: "0.3em",
+                  letterSpacing: "0.25em",
+                  lineHeight: "1.8",
                 }}
               >
                 {tab.name}
@@ -46,7 +47,7 @@ export const TabPanel: React.FC<TabPanelProps> = ({ tab, isActive }) => {
           )}
 
           {/* Links section */}
-          <div className='flex-1 flex flex-col justify-start py-8 pr-8'>
+          <div className='flex-1 flex flex-col justify-start py-8 pr-12'>
             <CategoryLinks categories={tab.categories} links={tab.links} />
           </div>
         </div>

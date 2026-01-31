@@ -341,7 +341,7 @@ export const LinkCard: React.FC<LinkCardProps> = ({ link, accentColor }) => {
       href={link.url}
       target='_blank'
       rel='noopener noreferrer'
-      className='inline-flex items-center gap-2 px-4 py-2.5 bg-mantle/80 backdrop-blur-sm rounded-lg shadow-lg hover:shadow-xl hover:bg-mantle hover:translate-y-0.5 transition-all duration-150 group border border-surface0/30 hover:border-surface0/60'
+      className='inline-flex items-center gap-2 px-3.5 py-2 bg-surface0/40 backdrop-blur-sm rounded-lg shadow-md hover:shadow-lg hover:bg-surface0/60 hover:translate-y-px transition-all duration-150 group border border-surface1/40 hover:border-surface1/70'
     >
       {IconComponent && (
         <IconComponent
