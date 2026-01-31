@@ -76,22 +76,8 @@ export const Tabs: React.FC<TabsProps> = ({ tabs }) => {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [activeTabIndex, tabs.length]);
 
-  // Mouse wheel navigation
-  useEffect(() => {
-    const handleWheel = (e: WheelEvent) => {
-      // Only scroll tabs, not page content
-      if (e.deltaY > 0) {
-        e.preventDefault();
-        handleTabChange((activeTabIndex + 1) % tabs.length);
-      } else if (e.deltaY < 0) {
-        e.preventDefault();
-        handleTabChange((activeTabIndex - 1 + tabs.length) % tabs.length);
-      }
-    };
-
-    window.addEventListener("wheel", handleWheel, { passive: false });
-    return () => window.removeEventListener("wheel", handleWheel);
-  }, [activeTabIndex, tabs.length]);
+  // Mouse wheel navigation - DISABLED
+  // Users can navigate using tab indicators (bottom left) or keyboard (arrows/h/l keys/numbers)
 
   const activeTab = tabs[activeTabIndex];
 
@@ -103,17 +89,20 @@ export const Tabs: React.FC<TabsProps> = ({ tabs }) => {
       ))}
 
       {/* Tab indicators (bottom left) */}
-      <div className='absolute bottom-4 left-4 z-20 flex items-center gap-1'>
+      <div className='absolute bottom-4 left-4 z-50 flex items-center gap-1 pointer-events-auto'>
         {tabs.map((tab, index) => (
           <button
             key={tab.id}
             onClick={() => handleTabChange(index)}
-            className={`w-2 h-2 rounded-full transition-all duration-300 ${
-              index === activeTabIndex ? "bg-green w-6" : "bg-surface1 hover:bg-surface2"
+            className={`w-6 h-6 rounded-full transition-all duration-300 flex items-center justify-center text-xs font-bold ${
+              index === activeTabIndex ? "bg-green text-base" : "bg-surface1 text-text hover:bg-surface2"
             }`}
             title={`${tab.name} (${index + 1})`}
             aria-label={`Tab ${index + 1}: ${tab.name}`}
-          />
+            type="button"
+          >
+            {index + 1}
+          </button>
         ))}
       </div>
 
