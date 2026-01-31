@@ -1,6 +1,6 @@
 import { X } from "lucide-react";
 import type React from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useConfig } from "@/hooks/useConfig";
 import { palettes } from "@/lib/palette";
 import type { PaletteName } from "@/types/config";
@@ -17,6 +17,16 @@ export const SettingsDialog: React.FC<SettingsDialogProps> = ({ isOpen, onClose 
   const [clockFormat, setClockFormat] = useState(config.clock.format);
   const [clockEnabled, setClockEnabled] = useState(config.clock.enabled);
   const [weatherEnabled, setWeatherEnabled] = useState(config.temperature.enabled);
+
+  // Lock scroll on body when dialog is open
+  useEffect(() => {
+    if (isOpen) {
+      document.documentElement.style.overflow = "hidden";
+      return () => {
+        document.documentElement.style.overflow = "";
+      };
+    }
+  }, [isOpen]);
 
   const handleSave = () => {
     updateNested("temperature", {
@@ -35,9 +45,9 @@ export const SettingsDialog: React.FC<SettingsDialogProps> = ({ isOpen, onClose 
 
   return (
     <div className='fixed inset-0 z-50 bg-black/50 flex items-center justify-center'>
-      <div className='bg-mantle rounded-lg shadow-2xl w-96 max-h-96 overflow-y-auto border border-surface0'>
+      <div className='bg-mantle rounded-lg shadow-2xl w-96 max-h-96 border border-surface0 flex flex-col'>
         {/* Header */}
-        <div className='flex items-center justify-between p-4 border-b border-surface0 sticky top-0 bg-mantle'>
+        <div className='flex items-center justify-between p-4 border-b border-surface0 bg-mantle flex-shrink-0'>
           <h2 className='text-lg font-bold text-text'>Settings</h2>
           <button onClick={onClose} className='p-1 hover:bg-surface0 rounded transition-colors'>
             <X className='w-5 h-5 text-text' />
@@ -45,7 +55,7 @@ export const SettingsDialog: React.FC<SettingsDialogProps> = ({ isOpen, onClose 
         </div>
 
         {/* Content */}
-        <div className='p-4 space-y-6'>
+        <div className='flex-1 overflow-y-auto p-4 space-y-6'>
           {/* Display Section */}
           <div className='space-y-3'>
             <h3 className='text-sm font-bold uppercase tracking-wider text-subtext0'>Display</h3>
@@ -168,7 +178,7 @@ export const SettingsDialog: React.FC<SettingsDialogProps> = ({ isOpen, onClose 
         </div>
 
         {/* Footer */}
-        <div className='flex gap-2 p-4 border-t border-surface0 bg-crust sticky bottom-0'>
+        <div className='flex gap-2 p-4 border-t border-surface0 bg-crust flex-shrink-0'>
           <button
             onClick={onClose}
             className='flex-1 px-4 py-2 bg-surface0 hover:bg-surface1 text-text rounded text-xs font-medium transition-colors'
