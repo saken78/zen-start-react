@@ -1,4 +1,5 @@
 import type React from "react";
+import { BookmarksTab } from "@/components/Bookmark/BookmarksTab";
 import type { Tab } from "@/types/config";
 import { CategoryLinks } from "./CategoryLinks";
 
@@ -8,6 +9,30 @@ interface TabPanelProps {
 }
 
 export const TabPanel: React.FC<TabPanelProps> = ({ tab, isActive }) => {
+  // Check if this is a bookmarks tab
+  const isBookmarksTab = tab.id === "bookmarks" || tab.name?.toLowerCase() === "bookmarks";
+
+  if (isBookmarksTab) {
+    return (
+      <div
+        className={`absolute inset-0 transition-opacity duration-300 ${
+          isActive ? "opacity-100" : "opacity-0 pointer-events-none"
+        }`}
+      >
+        {/* Simple background */}
+        <div className='absolute inset-0 bg-gradient-to-br from-surface1 to-base' />
+
+        {/* Overlay for readability */}
+        <div className='absolute inset-0 bg-black/20' />
+
+        {/* Bookmarks content */}
+        <div className='relative z-10 h-full'>
+          <BookmarksTab />
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div
       className={`absolute inset-0 transition-opacity duration-300 ${

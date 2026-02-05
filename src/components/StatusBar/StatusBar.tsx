@@ -29,23 +29,6 @@ export const StatusBar: React.FC<StatusBarProps> = ({
               {tabName} · {tabIndex + 1}/{tabCount}
             </span>
           )}
-
-          {/* Tab indicators */}
-          {config.tabs && (
-            <div className='flex items-center gap-2 pl-2 border-l border-surface0'>
-              {config.tabs.map((tab, index) => (
-                <div
-                  key={tab.id}
-                  className={`text-xs font-bold transition-colors ${
-                    index === tabIndex ? "text-green" : "text-subtext1"
-                  }`}
-                  title={tab.name}
-                >
-                  {index + 1}
-                </div>
-              ))}
-            </div>
-          )}
         </div>
 
         {/* Center section - Spacer */}

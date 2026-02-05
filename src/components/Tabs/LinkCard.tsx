@@ -1,8 +1,8 @@
+import * as Icons from "lucide-react";
 import type React from "react";
 import { useMemo } from "react";
-import * as Icons from "lucide-react";
-import type { Link } from "@/types/config";
 import { useConfig } from "@/hooks/useConfig";
+import type { Link } from "@/types/config";
 
 interface LinkCardProps {
   link: Link;
@@ -326,6 +326,40 @@ const iconMap: Record<string, React.ComponentType<any>> = {
   "fingers-crossed": Icons.Hand,
   fist: Icons.Hand,
   "raised-hand": Icons.Hand,
+
+  // Additional icons for bookmarks and AI tabs
+  checkbox: Icons.CheckSquare,
+  target: Icons.Target,
+  package: Icons.Package,
+  "trending-up": Icons.TrendingUp,
+  "brand-javascript": Icons.FileJson,
+  "brand-react": Icons.Atom,
+  route: Icons.Route,
+  "shield-check": Icons.ShieldCheck,
+  "gamepad-2": Icons.Gamepad2,
+  "shield-alert": Icons.ShieldAlert,
+  "help-circle": Icons.HelpCircle,
+  cpu: Icons.Cpu,
+  sparkles: Icons.Sparkles,
+  layers: Icons.Layers,
+  link: Icons.Link,
+  film: Icons.Film,
+  tv: Icons.Tv,
+  "folder-open": Icons.FolderOpen,
+  layout: Icons.Layout,
+  terminal: Icons.Terminal,
+  "git-branch": Icons.GitBranch,
+  "book-open": Icons.BookOpen,
+  "file-json": Icons.FileJson,
+  move: Icons.Move,
+  "pen-tool": Icons.PenTool,
+  "toggle-left": Icons.ToggleLeft,
+  sliders: Icons.SlidersHorizontal,
+  scroll: Icons.Scroll,
+  "form-input": Icons.FormInput,
+  icons: Icons.LayoutGrid,
+  gauge: Icons.Gauge,
+  flame: Icons.Flame,
 };
 
 export const LinkCard: React.FC<LinkCardProps> = ({ link, accentColor }) => {
